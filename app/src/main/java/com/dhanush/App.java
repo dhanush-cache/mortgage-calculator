@@ -13,16 +13,33 @@ public class App {
         int numberOfPayments;
 
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Principal: ");
-            principal = scanner.nextInt();
+            while (true) {
+                System.out.print("Principal: ");
+                principal = scanner.nextInt();
+                if (principal >= 1000 && principal <= 1_000_000)
+                    break;
+                System.out.println("Please enter a value between 1000 and 1,000,000.");
+            }
 
-            System.out.print("Annual Interest Rate: ");
-            float annualInterestRate = scanner.nextFloat();
-            monthlyInterestRate = annualInterestRate / PERCENT / MONTHS_IN_YEAR;
+            while (true) {
+                System.out.print("Annual Interest Rate: ");
+                float annualInterestRate = scanner.nextFloat();
+                if (annualInterestRate >= 1 && annualInterestRate <= 30) {
+                    monthlyInterestRate = annualInterestRate / PERCENT / MONTHS_IN_YEAR;
+                    break;
+                }
+                System.out.println("Please enter a value between 1 and 30.");
+            }
 
-            System.out.print("Period(Years): ");
-            byte years = scanner.nextByte();
-            numberOfPayments = years * MONTHS_IN_YEAR;
+            while (true) {
+                System.out.print("Period(Years): ");
+                byte years = scanner.nextByte();
+                if (years >= 1 && years <= 30) {
+                    numberOfPayments = years * MONTHS_IN_YEAR;
+                    break;
+                }
+                System.out.println("Please enter a value between 1 and 30.");
+            }
         }
 
         double mortgage = principal * monthlyInterestRate

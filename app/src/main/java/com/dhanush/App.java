@@ -6,37 +6,12 @@ import java.util.Scanner;
 public class App {
     static final byte MONTHS_IN_YEAR = 12;
     static final byte PERCENT = 100;
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int principal;
-        float annualInterestRate;
-        byte years;
-
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                System.out.print("Principal: ");
-                principal = scanner.nextInt();
-                if (principal >= 1000 && principal <= 1_000_000)
-                    break;
-                System.out.println("Please enter a value between 1000 and 1,000,000.");
-            }
-
-            while (true) {
-                System.out.print("Annual Interest Rate: ");
-                annualInterestRate = scanner.nextFloat();
-                if (annualInterestRate >= 1 && annualInterestRate <= 30)
-                    break;
-                System.out.println("Please enter a value between 1 and 30.");
-            }
-
-            while (true) {
-                System.out.print("Period(Years): ");
-                years = scanner.nextByte();
-                if (years >= 1 && years <= 30)
-                    break;
-                System.out.println("Please enter a value between 1 and 30.");
-            }
-        }
+        int principal = (int) readNumber("Principal", 1000, 1_000_000);
+        float annualInterestRate = (float) readNumber("Annual Interest Rate", 1, 30);
+        byte years = (byte) readNumber("Period(Years)", 1, 30);
 
         double mortgage = calculateMortgage(principal, annualInterestRate, years);
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
@@ -52,5 +27,16 @@ public class App {
                 / (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
         return mortgage;
+    }
+
+    public static double readNumber(String prompt, int min, int max) {
+        double value;
+        while (true) {
+            System.out.print(prompt + ": ");
+            value = scanner.nextDouble();
+            if (value >= min && value <= max)
+                return value;
+            System.out.println("Please enter a value between " + min + " and " + max + ".");
+        }
     }
 }

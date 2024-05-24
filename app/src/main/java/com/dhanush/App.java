@@ -3,9 +3,6 @@ package com.dhanush;
 import java.text.NumberFormat;
 
 public class App {
-    static final byte MONTHS_IN_YEAR = 12;
-    static final byte PERCENT = 100;
-
     static NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     public static void main(String[] args) {
@@ -30,7 +27,7 @@ public class App {
         MortgageCalculator calculator = new MortgageCalculator(principal, annualInterestRate, years);
         System.out.println("\nPAYMENT SCHEDULE");
         System.out.println("----------------");
-        for (short month = 1; month <= years * MONTHS_IN_YEAR; month++) {
+        for (short month = 1; month <= calculator.getNumberOfPayments(); month++) {
             double balance = calculator.calculateBalance(month);
             System.out.println(currency.format(balance));
         }

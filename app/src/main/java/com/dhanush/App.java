@@ -1,18 +1,17 @@
 package com.dhanush;
 
 import java.text.NumberFormat;
-import java.util.Scanner;
 
 public class App {
     static final byte MONTHS_IN_YEAR = 12;
     static final byte PERCENT = 100;
-    static Scanner scanner = new Scanner(System.in);
+
     static NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     public static void main(String[] args) {
-        int principal = (int) readNumber("Principal", 1000, 1_000_000);
-        float annualInterestRate = (float) readNumber("Annual Interest Rate", 1, 30);
-        byte years = (byte) readNumber("Period(Years)", 1, 30);
+        int principal = (int) Console.readNumber("Principal", 1000, 1_000_000);
+        float annualInterestRate = (float) Console.readNumber("Annual Interest Rate", 1, 30);
+        byte years = (byte) Console.readNumber("Period(Years)", 1, 30);
 
         printMortgage(principal, annualInterestRate, years);
 
@@ -56,17 +55,6 @@ public class App {
         for (short month = 1; month <= years * MONTHS_IN_YEAR; month++) {
             double balance = calculateBalance(principal, annualInterestRate, years, month);
             System.out.println(currency.format(balance));
-        }
-    }
-
-    public static double readNumber(String prompt, int min, int max) {
-        double value;
-        while (true) {
-            System.out.print(prompt + ": ");
-            value = scanner.nextDouble();
-            if (value >= min && value <= max)
-                return value;
-            System.out.println("Please enter a value between " + min + " and " + max + ".");
         }
     }
 }

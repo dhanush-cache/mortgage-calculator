@@ -27,6 +27,13 @@ public class MortgageCalculator {
                 / (Math.pow(1 + getMonthlyInterestRate(), getNumberOfPayments()) - 1);
     }
 
+    public double[] getPaymentSchedule() {
+        double[] paymentSchedule = new double[getNumberOfPayments()];
+        for (short month = 1; month <= getNumberOfPayments(); month++)
+            paymentSchedule[month - 1] = calculateBalance(month);
+        return paymentSchedule;
+    }
+
     public int getNumberOfPayments() {
         return years * MONTHS_IN_YEAR;
     }

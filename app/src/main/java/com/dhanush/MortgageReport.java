@@ -10,10 +10,8 @@ public class MortgageReport {
     public void printPaymentSchedule() {
         System.out.println("\nPAYMENT SCHEDULE");
         System.out.println("----------------");
-        for (short month = 1; month <= calculator.getNumberOfPayments(); month++) {
-            double balance = calculator.calculateBalance(month);
+        for (double balance : calculator.getPaymentSchedule())
             System.out.println(App.currency.format(balance));
-        }
     }
 
     public void printMortgage() {

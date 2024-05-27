@@ -19,10 +19,17 @@ public class ConstrainedTextField extends javax.swing.JTextField {
 
     public boolean isInRange() {
         try {
-            var value = Integer.parseInt(getText());
+            var value = Double.parseDouble(getText());
             return (value >= MIN && value <= MAX);
         } catch (NumberFormatException e) {
             return false;
         }
     }
+
+    public double getValue() {
+        if (isInRange())
+            return Double.parseDouble(getText());
+        return -1;
+    }
+
 }

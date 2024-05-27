@@ -6,9 +6,10 @@ public class App {
     static NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     public static void main(String[] args) {
-        console();
+        new Form().setVisible(true);
     }
 
+    @SuppressWarnings("unused")
     private static void console() {
         int principal = (int) Console.readNumber("Principal", 1000, 1_000_000);
         float annualInterestRate = (float) Console.readNumber("Annual Interest Rate", 1, 30);
